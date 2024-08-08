@@ -1,25 +1,36 @@
 ---
 title: "r-data-exploration"
 format: html
+editor_options: 
+  chunk_output_type: console
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
+## Setup
 ```{r}
-1 + 1
+# load packages ----
+library(GGally)
+library(tidyverse)
+library(skimr)
+
+# explore the data ----
+names(diamonds)
+dim(diamonds)
+summary(diamonds)
+head(diamonds)
+tail(diamonds)
+skimr::skim(diamonds)
 ```
 
-You can add options to executable code like this 
-
+## visualize it
 ```{r}
-#| echo: false
-2 * 2
+# create pairs plot ----
+ggpairs(data = diamonds)
+
+ggplot(data = diamonds, aes(x = carat, y = price)) +
+  geom_point()
+
+ggplot(data = diamonds, aes(x = carat)) +
+  geom_histogram()
+
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
